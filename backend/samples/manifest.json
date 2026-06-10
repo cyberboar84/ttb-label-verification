@@ -1,0 +1,38 @@
+{
+  "old_tom_good.jpg": {
+    "brand_name": "Old Tom Distillery",
+    "class_type": "Kentucky Straight Bourbon Whiskey",
+    "alcohol_content": "45% Alc./Vol.",
+    "net_contents": "750 mL"
+  },
+  "stones_throw_caps.jpg": {
+    "brand_name": "Stone's Throw",
+    "class_type": "Small Batch Rye Whiskey",
+    "alcohol_content": "50% Alc./Vol.",
+    "net_contents": "750 mL"
+  },
+  "silver_creek_titlecase_warning.jpg": {
+    "brand_name": "Silver Creek",
+    "class_type": "Tennessee Whiskey",
+    "alcohol_content": "40% Alc./Vol.",
+    "net_contents": "750 mL"
+  },
+  "copper_ridge_no_warning.jpg": {
+    "brand_name": "Copper Ridge",
+    "class_type": "Single Malt Whiskey",
+    "alcohol_content": "46% Alc./Vol.",
+    "net_contents": "750 mL"
+  },
+  "harbor_gin_wrong_abv.jpg": {
+    "brand_name": "Harbor Light",
+    "class_type": "London Dry Gin",
+    "alcohol_content": "40% Alc./Vol.",
+    "net_contents": "750 mL"
+  },
+  "old_tom_tilted.jpg": {
+    "brand_name": "Old Tom Distillery",
+    "class_type": "Kentucky Straight Bourbon Whiskey",
+    "alcohol_content": "45% Alc./Vol.",
+    "net_contents": "750 mL"
+  }
+}
