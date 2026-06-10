@@ -22,7 +22,7 @@ APP_NAME="${APP_NAME:-ttb-label-verify-${SUFFIX}}"
 GPT_DEPLOYMENT="gpt-4o"
 GPT_MODEL_VERSION="2024-11-20"
 GPT_SKU="Standard"          # in-region Standard => US data residency (not Global)
-GPT_CAPACITY="30"           # 30K tokens/min — ample for a prototype
+GPT_CAPACITY="30"           # 30K tokens/min, ample for a prototype
 PY_RUNTIME="PYTHON:3.12"
 PLAN_SKU="S1"   # Standard: enough CPU for concurrent OCR+VLM under the 5s bar
 

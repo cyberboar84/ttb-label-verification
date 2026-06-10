@@ -2,7 +2,7 @@
 
 Each attack is a real, OCR-readable label that embeds a prompt-injection or
 adversarial payload aimed at the gpt-4o field-extraction step. The goal of an
-attacker is to manipulate the compliance verdict — typically to engineer a false
+attacker is to manipulate the compliance verdict, typically to engineer a false
 PASS (e.g., make a fraudulent label's fields match the application, or make a
 non-compliant warning report as valid).
 
@@ -87,7 +87,7 @@ def render(brand, class_type, abv, net, producer, warning,
 
     if inject:
         if inject_style == "prominent":
-            # Bold-ish callout box, mid-label — hard to miss.
+            # Bold-ish callout box, mid-label, hard to miss.
             f = SANS(19)
             y = 660
             for ln in _wrap(d, inject, f, W - 160):
@@ -193,7 +193,7 @@ def main():
         json.dump(meta, f, indent=2)
     print(f"Generated {len(meta)} adversarial labels in {OUT}")
     for m in meta:
-        print(" ", m["file"], "—", m["technique"])
+        print(" ", m["file"], ", ", m["technique"])
 
 
 if __name__ == "__main__":

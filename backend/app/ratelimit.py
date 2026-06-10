@@ -22,7 +22,7 @@ class DailyCircuitBreaker:
     midnight. Set high enough that legitimate evaluation never trips it.
 
     In-memory and per-process: with N gunicorn workers the effective cap is N x
-    the configured value — fine as a backstop. Production would use a shared
+    the configured value, fine as a backstop. Production would use a shared
     counter; see SECURITY.md."""
 
     def __init__(self, daily_cap: int):
@@ -62,7 +62,7 @@ def client_ip(request) -> str:
 
     App Service sits behind a proxy and sets X-Forwarded-For as "<ip>:<port>"
     (and may chain multiple hops). The ephemeral source port differs on every
-    connection, so we MUST strip it — otherwise each request lands in its own
+    connection, so we MUST strip it, otherwise each request lands in its own
     bucket and the limiter never engages. We take the first hop and drop a
     trailing ":port" (IPv4); IPv6 (multiple colons) is left intact."""
     fwd = request.headers.get("x-forwarded-for", "")

@@ -9,7 +9,7 @@ otherwise-rejected images before they ever reach OCR:
   - mild sharpening
 
 All operations are local (Pillow), add only a few milliseconds, and never call
-out to the network — which keeps us well inside the latency budget.
+out to the network, which keeps us well inside the latency budget.
 """
 
 from __future__ import annotations

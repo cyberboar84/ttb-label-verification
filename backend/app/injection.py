@@ -45,7 +45,7 @@ _PATTERNS: list[tuple[re.Pattern, str]] = [
     (re.compile(r"\bsystem prompt\b|your (full )?instructions", re.I),
      "prompt-exfiltration attempt"),
     # High-signal non-English injection phrases (these don't occur on real
-    # labels). Full multilingual coverage needs a model — see SECURITY.md.
+    # labels). Full multilingual coverage needs a model, see SECURITY.md.
     (re.compile(r"ignora\b.{0,25}\b(la marca|el|arriba|instrucc)", re.I),
      "instruction to ignore (es)"),
     (re.compile(r"reporta(r)?\b.{0,30}\b(como|la marca|el valor)", re.I),

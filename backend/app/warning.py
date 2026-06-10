@@ -1,7 +1,7 @@
 """Government health warning verification.
 
 This is the highest-stakes check in the app. Per Jenny: the warning must be
-exact — word-for-word — and "GOVERNMENT WARNING:" must be in all caps. People
+exact, word-for-word, and "GOVERNMENT WARNING:" must be in all caps. People
 try to get creative (smaller font, title case, reworded text); all of those are
 rejections.
 
@@ -17,7 +17,7 @@ import re
 
 from .models import FieldResult, Verdict
 
-# 27 CFR 16.21 — the mandatory statement, verbatim.
+# 27 CFR 16.21, the mandatory statement, verbatim.
 CANONICAL_WARNING = (
     "GOVERNMENT WARNING: (1) According to the Surgeon General, women should not "
     "drink alcoholic beverages during pregnancy because of the risk of birth "
@@ -29,7 +29,7 @@ CANONICAL_WARNING = (
 REQUIRED_PREFIX = "GOVERNMENT WARNING:"
 
 # The statutory warning's distinct clauses. We verify these are present (fuzzily)
-# rather than demanding a character-perfect match — real-photo OCR is never
+# rather than demanding a character-perfect match, real-photo OCR is never
 # perfect, but the *content* (clauses) is what regulation requires. Missing a
 # clause is a real violation; garbled characters within a clause are not.
 _KEY_CLAUSES = [
@@ -67,7 +67,7 @@ def check_warning(raw_ocr: str | None) -> FieldResult:
       - MISMATCH: wording differs from statute, OR the required prefix is not
                   in all caps (Jenny's title-case rejection)
       - REVIEW:   wording is very close but not exact (likely OCR noise vs. a
-                  real violation — a human should glance)
+                  real violation, a human should glance)
       - PASS:     prefix is all-caps and wording matches the statute
     """
     field = "government_warning"
@@ -99,7 +99,7 @@ def check_warning(raw_ocr: str | None) -> FieldResult:
     norm_found = _normalize_for_wording(span)
     norm_canon = _normalize_for_wording(CANONICAL_WARNING)
 
-    # 2) Caps violation (Jenny's title-case catch) — independent of wording.
+    # 2) Caps violation (Jenny's title-case catch), independent of wording.
     if not has_allcaps_prefix and prefix_present_anycase:
         return FieldResult(
             field=field, verdict=Verdict.MISMATCH, expected=expected_preview,
@@ -120,7 +120,7 @@ def check_warning(raw_ocr: str | None) -> FieldResult:
     # 4) Robust path (judgment, not character-matching): require each statutory
     #    CLAUSE to appear, fuzzily. OCR noise within a clause is tolerated, but a
     #    reworded or missing clause still fails. A warning that is present yet
-    #    only partially readable goes to human review — not an auto-reject —
+    #    only partially readable goes to human review, not an auto-reject, 
     #    which mirrors how an agent handles a poorly-shot image.
     present = sum(1 for c in _KEY_CLAUSES
                   if fuzz.partial_ratio(c, norm_found) >= _CLAUSE_THRESHOLD)
@@ -136,11 +136,11 @@ def check_warning(raw_ocr: str | None) -> FieldResult:
             field=field, verdict=Verdict.REVIEW, expected=expected_preview,
             found=span[:200], score=float(round(100 * present / total)),
             note=f"Warning detected, but only {present} of {total} required clauses "
-                 "could be read clearly (likely image quality) — please review.",
+                 "could be read clearly (likely image quality), please review.",
         )
     return FieldResult(
         field=field, verdict=Verdict.MISMATCH, expected=expected_preview,
         found=span[:200], score=0.0,
-        note="No recognizable statutory warning content — the warning appears "
+        note="No recognizable statutory warning content, the warning appears "
              "reworded or absent.",
     )

@@ -3,7 +3,7 @@
 Red-teaming showed two evasion vectors that rely on characters that *look* like
 ASCII but aren't: Unicode homoglyphs in injection text (to dodge the keyword
 detector) and letter-for-digit swaps in numeric fields ("4O%" for "40%"). Azure
-OCR happens to normalize many of these to ASCII because it reads by shape — but
+OCR happens to normalize many of these to ASCII because it reads by shape, but
 relying on that is fragile. These helpers fold confusables in our own code so the
 defense holds regardless of OCR behavior.
 """
@@ -40,7 +40,7 @@ def fold_for_detection(text: str | None) -> str:
 
 
 def fold_numeric(text: str | None) -> str:
-    """Map letter-shaped digits to digits when adjacent to a real digit — used
+    """Map letter-shaped digits to digits when adjacent to a real digit, used
     only when parsing numeric fields, so '4O%' parses as '40%' while unit text
     ('750 mL', 'Liter') is left intact. For parsing only, never for display."""
     if not text:

@@ -15,7 +15,7 @@ from pydantic import BaseModel, Field
 
 class Verdict(str, Enum):
     """Per-field outcome. REVIEW is the deliberate middle ground that mirrors
-    Dave's "obviously the same thing" judgment call — a human glances at it."""
+    Dave's "obviously the same thing" judgment call, a human glances at it."""
 
     PASS = "PASS"
     REVIEW = "REVIEW"
@@ -31,10 +31,10 @@ class ApplicationData(BaseModel):
     alcohol_content: str | None = None  # free text, e.g. "45% Alc./Vol."
     net_contents: str | None = None  # free text, e.g. "750 mL"
     # The government warning is fixed by regulation, so it is not part of the
-    # application payload — it is checked against the canonical statute text.
+    # application payload, it is checked against the canonical statute text.
 
     def is_empty(self) -> bool:
-        """True when no application values were supplied — triggers the zero-input
+        """True when no application values were supplied, triggers the zero-input
         compliance-only flow (the primary 'scan the label' path)."""
         return not any((self.brand_name, self.class_type,
                         self.alcohol_content, self.net_contents))
@@ -74,7 +74,7 @@ class VerificationResult(BaseModel):
     fields: list[FieldResult]
     warning: FieldResult
     # Reasons the label text appears to be attacking the verification system
-    # (prompt injection). Non-empty forces human review — never an auto-PASS.
+    # (prompt injection). Non-empty forces human review, never an auto-PASS.
     security_flags: list[str] = []
     processing_ms: int | None = None
 

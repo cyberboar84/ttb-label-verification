@@ -9,7 +9,7 @@ on real labels (straight from the stakeholder interviews):
   - net_contents  -> numeric + unit normalization (mL / L / fl oz)
 
 Thresholds are intentionally explicit and tunable. The REVIEW band exists so the
-app augments agents rather than silently auto-rejecting — Dave keeps his judgment.
+app augments agents rather than silently auto-rejecting, Dave keeps his judgment.
 """
 
 from __future__ import annotations
@@ -76,7 +76,7 @@ def match_text(field: str, expected: str | None, found: str | None,
         note = "Match." if score == 100 else f"Close match ({score:.0f}%)."
     elif score >= review_t:
         verdict = Verdict.REVIEW
-        note = f"Possible match ({score:.0f}%) — verify; may be a formatting variant."
+        note = f"Possible match ({score:.0f}%), verify; may be a formatting variant."
     else:
         verdict = Verdict.MISMATCH
         note = f"Does not match application ({score:.0f}%)."
@@ -108,7 +108,7 @@ def match_abv(expected: str | None, found: str | None) -> FieldResult:
     exp_v, fnd_v = _parse_abv(expected), _parse_abv(found)
     exp, fnd = _clean(expected), _clean(found)
     if exp_v is None or fnd_v is None:
-        # Could not parse a number on one side — fall back to text comparison.
+        # Could not parse a number on one side, fall back to text comparison.
         return match_text(field, expected, found, pass_t=90, review_t=75)
     delta = abs(exp_v - fnd_v)
     if delta <= ABV_TOLERANCE:
@@ -187,7 +187,7 @@ def _presence(key: str, value: str | None, required: bool = True,
 
 def compliance_only(found: ExtractedFields, warning_result: FieldResult,
                     label_id: str | None = None) -> VerificationResult:
-    """Zero-input 'scan the label' check — no application data required.
+    """Zero-input 'scan the label' check, no application data required.
 
     Verifies the government warning (exact) and that every mandatory element is
     present, applying TTB's beverage-type-specific rules: alcohol content is

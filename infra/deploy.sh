@@ -22,7 +22,7 @@ echo "==> Deploying $(du -h "$ZIP" | cut -f1) bundle to $APP_NAME"
 # The deploy command can report a non-zero "worker failed to start within the
 # allotted time" even when the container comes up moments later (a warm-up race,
 # especially right after an app-settings change). So we don't trust its exit code
-# — we poll /health as the real source of truth.
+#, we poll /health as the real source of truth.
 az webapp deploy -g "$RG" -n "$APP_NAME" --type zip --src-path "$ZIP" -o none \
   || echo "Note: deploy returned non-zero (often a cosmetic warm-up timeout); verifying health..."
 

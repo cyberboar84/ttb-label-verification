@@ -13,11 +13,11 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
-    # Azure AI Vision (Image Analysis 4.0 / Read) — verbatim OCR.
+    # Azure AI Vision (Image Analysis 4.0 / Read), verbatim OCR.
     vision_endpoint: str = ""
     vision_key: str = ""
 
-    # Azure OpenAI (GPT-4o vision) — semantic field extraction.
+    # Azure OpenAI (GPT-4o vision), semantic field extraction.
     aoai_endpoint: str = ""
     aoai_key: str = ""
     aoai_deployment: str = "gpt-4o"
@@ -37,7 +37,7 @@ class Settings(BaseSettings):
     # in any real environment.
     require_azure: bool = False
 
-    # Batch concurrency — how many labels we process in parallel. Tuned to hit
+    # Batch concurrency, how many labels we process in parallel. Tuned to hit
     # the per-label latency target without hammering Azure rate limits.
     batch_concurrency: int = 8
 

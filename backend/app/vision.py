@@ -1,8 +1,8 @@
-"""Azure AI Vision Image Analysis 4.0 (Read) — verbatim OCR.
+"""Azure AI Vision Image Analysis 4.0 (Read), verbatim OCR.
 
 We use the synchronous Image Analysis Read feature (Florence-based, within Azure
 AI Foundry) specifically because it returns low-latency results suitable for a
-real-time UI — the whole reason we can meet the 5-second target. Document
+real-time UI, the whole reason we can meet the 5-second target. Document
 Intelligence would give higher-res OCR but is asynchronous and built for forms,
 which fights the latency budget.
 

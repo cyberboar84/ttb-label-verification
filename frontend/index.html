@@ -57,9 +57,8 @@
     <main id="single" class="panel active">
       <div class="card">
         <h2 class="card__title">Verify a label</h2>
-        <p class="hint">Add the label image. A single front label is fine — but if
-          the warning, net contents, or bottler appear on a separate
-          <strong>back label</strong>, add that too and they'll be checked together.</p>
+        <p class="hint">Add the front label, and the back too if required info is
+          split across both.</p>
         <label class="dropzone" id="dropzone">
           <input type="file" id="fileInput" accept="image/*" multiple hidden />
           <span id="dropText">Drag label image(s) here, or choose files</span>
@@ -98,7 +97,7 @@
     <main id="batch" class="panel">
       <div class="card">
         <h2 class="card__title">Verify a batch of labels</h2>
-        <p class="hint">For high-volume submissions — select multiple label images
+        <p class="hint">For high-volume submissions, select multiple label images
           at once and verify them together.</p>
         <label class="dropzone dropzone--small">
           <input type="file" id="batchFiles" accept="image/*" multiple hidden />
@@ -130,7 +129,7 @@
   <footer class="site-footer">
     <div class="site-footer__inner">
       <span id="modeBadge" class="badge"></span>
-      <span class="site-footer__note">Prototype for evaluation. Standalone — not
+      <span class="site-footer__note">Prototype for evaluation. Standalone, not
         connected to COLA. No label data is retained.</span>
     </div>
   </footer>

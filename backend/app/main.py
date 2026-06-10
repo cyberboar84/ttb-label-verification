@@ -35,7 +35,7 @@ async def lifespan(app: FastAPI):
     if settings.require_azure and settings.use_mock:
         raise RuntimeError(
             "REQUIRE_AZURE is set but Vision/OpenAI credentials are missing or "
-            "incomplete — refusing to start in mock mode."
+            "incomplete, refusing to start in mock mode."
         )
     # Warm the model clients at boot so the first real request isn't a cold
     # start. Always On keeps the worker warm thereafter. Best-effort + bounded so
@@ -168,7 +168,7 @@ async def verify_single(
         )
     except asyncio.TimeoutError:
         raise HTTPException(status_code=504,
-                            detail="Verification timed out — please try again.")
+                            detail="Verification timed out, please try again.")
 
 
 @app.post("/api/verify/batch")

@@ -28,10 +28,10 @@ function statusSubtitle(r) {
       ? "All fields match the application; warning is valid."
       : "Government warning valid and all required elements present.";
   }
-  if (r.overall === "REVIEW") return "Borderline — please confirm the details below.";
+  if (r.overall === "REVIEW") return "Borderline; please confirm the details below.";
   const issues = [...(r.fields || []), ...(r.warning ? [r.warning] : [])]
     .filter((f) => f.verdict !== "PASS").length;
-  return `${issues} issue${issues > 1 ? "s" : ""} found — see details below.`;
+  return `${issues} issue${issues > 1 ? "s" : ""} found. See details below.`;
 }
 
 // ---- government banner toggle ----
@@ -145,13 +145,13 @@ async function runVerify() {
   }
 }
 
-// Shared per-field detail markup — used by both the single view and each
+// Shared per-field detail markup, used by both the single view and each
 // expanded batch row, so they show identical information.
 function fieldRowsHtml(r) {
   let html = "";
   if (r.security_flags && r.security_flags.length) {
     html += `<div class="security-alert">
-      <strong>⚠ Security alert</strong> — this label contains text directed at the
+      <strong>⚠ Security alert:</strong> this label contains text directed at the
       verification system, so the automatic reading may be unreliable. Review the
       label by hand before deciding.
     </div>`;
@@ -231,7 +231,7 @@ batchFilesInput.addEventListener("change", () => {
 function renderBatchList() {
   const n = selectedBatch.length;
   batchText.textContent = n
-    ? `${n} label${n > 1 ? "s" : ""} selected — add more, or verify`
+    ? `${n} label${n > 1 ? "s" : ""} selected. Add more, or verify.`
     : "Select label images to verify";
   clearBatch.hidden = n === 0;
   batchList.innerHTML = selectedBatch.map((f, i) =>
