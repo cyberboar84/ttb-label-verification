@@ -1,0 +1,4 @@
+# Red-team image-generation only (NOT app dependencies).
+# Install with: uv pip install -r redteam/requirements-dev.txt
+qrcode[pil]
+piexif
