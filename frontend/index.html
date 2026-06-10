@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Label Verification System | Alcohol and Tobacco Tax and Trade Bureau</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Official U.S. government banner (USWDS pattern) -->
+  <section class="gov-banner" aria-label="Official website of the United States government">
+    <div class="gov-banner__inner">
+      <svg class="gov-banner__flag" viewBox="0 0 20 14" aria-hidden="true">
+        <rect width="20" height="14" fill="#b22234"/>
+        <rect y="1.08" width="20" height="1.08" fill="#fff"/>
+        <rect y="3.23" width="20" height="1.08" fill="#fff"/>
+        <rect y="5.38" width="20" height="1.08" fill="#fff"/>
+        <rect y="7.54" width="20" height="1.08" fill="#fff"/>
+        <rect y="9.69" width="20" height="1.08" fill="#fff"/>
+        <rect y="11.85" width="20" height="1.08" fill="#fff"/>
+        <rect width="8" height="7.54" fill="#3c3b6e"/>
+      </svg>
+      <span class="gov-banner__text">An official website of the United States government</span>
+      <button class="gov-banner__button" id="bannerToggle" aria-expanded="false"
+              aria-controls="bannerContent">Here's how you know</button>
+    </div>
+    <div class="gov-banner__content" id="bannerContent" hidden>
+      <div class="gov-banner__guidance">
+        <p><strong>Official websites use .gov</strong><br />
+          A <strong>.gov</strong> website belongs to an official government
+          organization in the United States.</p>
+        <p><strong>Secure .gov websites use HTTPS</strong><br />
+          A lock or <strong>https://</strong> means you've safely connected to the
+          website.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Agency masthead -->
+  <header class="masthead">
+    <div class="masthead__inner">
+      <div class="masthead__agency">
+        <div class="masthead__bureau">Alcohol and Tobacco Tax and Trade Bureau</div>
+        <div class="masthead__app">Label Verification System</div>
+      </div>
+      <span class="masthead__tag">Prototype</span>
+    </div>
+  </header>
+
+  <div class="container">
+    <nav class="tabs" aria-label="Verification mode">
+      <button class="tab active" data-tab="single">Single label</button>
+      <button class="tab" data-tab="batch">Batch</button>
+    </nav>
+
+    <!-- ============ SINGLE ============ -->
+    <main id="single" class="panel active">
+      <div class="card">
+        <h2 class="card__title">Verify a label</h2>
+        <p class="hint">Add the label image. A single front label is fine — but if
+          the warning, net contents, or bottler appear on a separate
+          <strong>back label</strong>, add that too and they'll be checked together.</p>
+        <label class="dropzone" id="dropzone">
+          <input type="file" id="fileInput" accept="image/*" multiple hidden />
+          <span id="dropText">Drag label image(s) here, or choose files</span>
+        </label>
+        <div id="panelThumbs" class="thumbs"></div>
+        <button type="button" id="clearSingle" class="btn-link" hidden>Start over</button>
+
+        <details class="optional" id="optional">
+          <summary>Compare against application data (optional)</summary>
+          <p class="hint">In production these values come from the COLA application
+            automatically. Enter them to also compare the label field-by-field, or
+            leave blank to check the label for compliance only.</p>
+          <div class="fields">
+            <label>Brand name
+              <input type="text" id="brand_name" placeholder="e.g. Old Tom Distillery" />
+            </label>
+            <label>Class / type designation
+              <input type="text" id="class_type" placeholder="e.g. Kentucky Straight Bourbon Whiskey" />
+            </label>
+            <label>Alcohol content
+              <input type="text" id="alcohol_content" placeholder="e.g. 45% Alc./Vol." />
+            </label>
+            <label>Net contents
+              <input type="text" id="net_contents" placeholder="e.g. 750 mL" />
+            </label>
+          </div>
+        </details>
+
+        <button id="verifyBtn" class="btn-primary">Verify label</button>
+      </div>
+
+      <section id="result" class="result" hidden aria-live="polite"></section>
+    </main>
+
+    <!-- ============ BATCH ============ -->
+    <main id="batch" class="panel">
+      <div class="card">
+        <h2 class="card__title">Verify a batch of labels</h2>
+        <p class="hint">For high-volume submissions — select multiple label images
+          at once and verify them together.</p>
+        <label class="dropzone dropzone--small">
+          <input type="file" id="batchFiles" accept="image/*" multiple hidden />
+          <span id="batchText">Select label images to verify</span>
+        </label>
+        <ul id="batchList" class="file-list"></ul>
+        <button type="button" id="clearBatch" class="btn-link" hidden>Clear all</button>
+
+        <details class="optional">
+          <summary>Application data manifest (optional)</summary>
+          <p class="hint">To compare each label against its COLA values, provide a
+            JSON object mapping each file name to its application fields. Leave
+            blank to check every label for compliance only.</p>
+          <textarea id="manifest" rows="6" spellcheck="false" placeholder='{
+  "old_tom_good.jpg": {
+    "brand_name": "Old Tom Distillery",
+    "alcohol_content": "45% Alc./Vol.",
+    "net_contents": "750 mL"
+  }
+}'></textarea>
+        </details>
+
+        <button id="batchBtn" class="btn-primary">Verify batch</button>
+      </div>
+      <section id="batchResult" class="result" hidden aria-live="polite"></section>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <span id="modeBadge" class="badge"></span>
+      <span class="site-footer__note">Prototype for evaluation. Standalone — not
+        connected to COLA. No label data is retained.</span>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
